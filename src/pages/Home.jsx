@@ -17,7 +17,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1.08, 1.3]);
   const cy = useTransform(scrollYProgress, [0, 1], ['0%', '45%']);
   const op = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-  useEffect(() => { const id = setInterval(() => setW((x) => (x + 1) % HERO_WORDS.length), 2600); return () => clearInterval(id); }, []);
+  useEffect(() => { const id = setInterval(() => setW((x) => (x + 1) % HERO_WORDS.length), 4000); return () => clearInterval(id); }, []);
   return (
     <section className="hero" ref={ref}>
       <motion.div className="page-hero-bg" style={{ y, scale }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.6 }}>

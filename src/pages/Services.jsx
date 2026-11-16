@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, Check, MessageCircle, Phone, Mail, Rotate3d, Footprints, Siren, Clock } from 'lucide-react';
+import { ArrowUpRight, Check, MessageCircle, Phone, Mail, Rotate3d, Footprints, Siren, Clock, MapPin } from 'lucide-react';
 import {
-  IMG, COMPANY, SECTORS, EMIRATES, HUB, FAB_ITEMS, FAB_SPECS, MAINT_STATS, MAINT_FEATURES, PLANS, MAINT_NUMBERS, MAINT_TESTIMONIALS,
+  IMG, COMPANY, SECTORS, EMIRATES, BRANCHES, HUB, FAB_ITEMS, FAB_SPECS, MAINT_STATS, MAINT_FEATURES, PLANS, MAINT_NUMBERS, MAINT_TESTIMONIALS,
   DESIGN, ACCOUNT_BENEFITS, OPENING_PILLARS, URGENT_SLA, URGENT_CASES, u,
 } from '../data';
 import { Reveal, Counter } from '../components/ui';
@@ -444,7 +444,8 @@ export function Contact() {
       </FormSection>
       <section className="section sec-light">
         <div className="container center-box">
-          <SectionHead eyebrow="Prefer to visit?" lines={['Five branches across the UAE']} accent="Five" center />
+          <SectionHead eyebrow="Prefer to visit?" lines={[`${BRANCHES.length} branches across the UAE and Syria`]} accent={String(BRANCHES.length)} center />
+          <div className="chips" style={{ justifyContent: 'center', marginTop: 0 }}>{BRANCHES.map((b) => <span className="chip" key={b.name + b.tag}><MapPin />{b.name} · {b.tag}</span>)}</div>
           <Reveal className="hero-actions"><Btn to="/branches">Find a branch</Btn></Reveal>
         </div>
       </section>

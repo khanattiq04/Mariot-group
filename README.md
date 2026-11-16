@@ -25,7 +25,8 @@ Branches · Blog · Contact · Quote · 404
 - `src/index.css`, `src/pages.css` — styles
 
 ## Before going live
-1. **Brand logos** — copy the existing `assets/brands/` folder from the current site into `public/assets/brands/`.
+0. **Branches** — three branches (Sharjah Industrial Area 11 showroom, Al Zahiyah Abu Dhabi, Damascus) have no phone/email yet; add them in `BRANCHES` in `src/data.js`.
+1. **Brand logos** — stored in `public/assets/brands/` (600×300 webp). To add a brand, drop its logo there and add a line to `RAW_BRANDS` in `src/data.js`. Scotsman has no logo file yet.
    Until then logos load from the live mariot-group.com, and fall back to the brand name as text.
 2. **Projects** — `PROJECTS` in `src/data.js` is a sample portfolio. Replace with real projects and photos.
 3. **Photos** — royalty-free Unsplash / Pexels images are loaded from their CDNs. To self-host, download them into `public/` and change the URLs in `data.js`.

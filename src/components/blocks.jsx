@@ -144,11 +144,12 @@ export function Btn({ to, href, children, variant = 'primary', icon = true, ...r
 
 /* ---------- Velocity marquee ---------- */
 const wrap = (min, max, v) => { const r = max - min; return ((((v - min) % r) + r) % r) + min; };
-export function Marquee({ items, base = 2, className = '' }) {
+/* base = % of the strip moved per second (lower is slower) */
+export function Marquee({ items, base = 0.6, className = '' }) {
   const x = useMotionValue(0);
   const { scrollY } = useScroll();
   const vel = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
-  const factor = useTransform(vel, [0, 1000], [0, 5], { clamp: false });
+  const factor = useTransform(vel, [0, 1000], [0, 1.5], { clamp: false });
   const dir = useRef(1);
   useAnimationFrame((t, d) => {
     let move = dir.current * base * (Math.min(d, 50) / 1000);

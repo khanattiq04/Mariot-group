@@ -243,14 +243,15 @@ a:hover > .img-zoom img.ok, .photo-card:hover .img-zoom img.ok, .store-band:hove
 /* brands */
 .brands-sec { overflow: hidden; }
 .logo-row { overflow: hidden; margin-top: 16px; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.logo-track { display: flex; gap: 16px; width: max-content; animation: slide 70s linear infinite; }
+.logo-track { display: flex; gap: 16px; width: max-content; animation: slide 180s linear infinite; }
 .logo-row.rev .logo-track { animation-direction: reverse; }
 .logo-row:hover .logo-track { animation-play-state: paused; }
 @keyframes slide { to { transform: translateX(-50%); } }
-.brand-tile { flex: none; width: 170px; height: 96px; border-radius: 18px; background: #fff; border: 1px solid rgba(5,8,15,0.08); display: grid; place-items: center; padding: 16px; color: var(--ink); transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s; }
+.brand-tile { flex: none; width: 170px; height: 96px; border-radius: 18px; background: #fff; border: 1px solid rgba(5,8,15,0.08); display: grid; place-items: center; padding: 10px 14px; color: var(--ink); transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s; }
 .brand-tile:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 24px 40px -22px rgba(5,8,15,0.5); border-color: var(--red); }
-.brand-tile img { max-height: 56px; max-width: 100%; object-fit: contain; filter: grayscale(1); opacity: .75; transition: filter .4s, opacity .4s; }
-.brand-tile:hover img { filter: none; opacity: 1; }
+.brand-tile img { max-height: 72px; max-width: 100%; object-fit: contain; transition: transform .45s var(--ease); }
+.brand-tile:hover img { transform: scale(1.08); }
+.brand-tile.big img { max-height: 84px; }
 .brand-text { font-family: var(--display); font-weight: 700; font-size: 14px; text-align: center; line-height: 1.2; }
 .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
 .brand-tile.big { width: 100%; height: 132px; grid-template-rows: 1fr auto; gap: 8px; }
@@ -418,9 +419,34 @@ a:hover > .img-zoom img.ok, .photo-card:hover .img-zoom img.ok, .store-band:hove
 .footer-top { grid-template-columns: 1.5fr repeat(3, 1fr) 1.3fr; }
 .footer ul a, .footer ul span { font-weight: 600; font-size: 14.5px; }
 .foot-contact li { display: flex; gap: 10px; align-items: flex-start; } .foot-contact svg { width: 16px; height: 16px; flex: none; margin-top: 4px; color: var(--red-2); }
-.socials { display: flex; gap: 10px; margin-top: 20px; }
-.socials a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 12px; font-weight: 800; transition: all .4s var(--ease); }
-.socials a:hover { background: var(--red); border-color: var(--red); transform: translateY(-4px) rotate(8deg); }
+.socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; max-width: 220px; }
+.socials a { position: relative; width: 46px; height: 46px; border-radius: 15px; display: grid; place-items: center; isolation: isolate; color: #fff;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--line); backdrop-filter: blur(8px); transition: transform .45s var(--ease), border-color .3s, color .3s, box-shadow .45s var(--ease), border-radius .45s var(--ease); }
+.socials a::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; background: var(--brand); z-index: -1; transform: scale(0); opacity: 0; transition: transform .45s var(--ease), opacity .3s; }
+.socials a svg { width: 20px; height: 20px; transition: transform .45s var(--ease); }
+.socials a:hover, .socials a:focus-visible { transform: translateY(-6px); border-color: transparent; border-radius: 50%; box-shadow: 0 14px 28px -12px rgba(0,0,0,0.8); }
+.socials a:hover::before, .socials a:focus-visible::before { transform: scale(1); opacity: 1; }
+.socials a:hover svg { transform: scale(1.15) rotate(-8deg); }
+.socials a.dark:hover { color: #000; }
+.socials .tip { position: absolute; bottom: calc(100% + 10px); left: 50%; translate: -50% 6px; padding: 5px 10px; border-radius: 8px; background: #fff; color: var(--ink); font-size: 11px; font-weight: 800; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s, translate .35s var(--ease); }
+.socials a:hover .tip, .socials a:focus-visible .tip { opacity: 1; translate: -50% 0; }
 @media (max-width: 1100px) { .footer-top { grid-template-columns: 1fr 1fr 1fr; } .footer-top > :first-child { grid-column: 1 / -1; } }
 @media (max-width: 620px) { .footer-top { grid-template-columns: 1fr 1fr; } }
 .wa-float { right: max(20px, env(safe-area-inset-right, 0px)); }
+
+/* "Our Branches" strip above every footer */
+.footer { padding-top: 0; }
+.branch-strip { margin-bottom: 56px; }
+.branch-strip-h { display: inline-block; font-family: var(--display); font-weight: 700; font-style: italic; font-size: 18px; margin: 34px 0 14px; }
+.branch-cells { display: flex; flex-wrap: wrap; gap: 3px; overflow: hidden; background: var(--ink); margin: 0 -14px; }
+.branch-cells > div { flex: 1 1 22%; min-width: 220px; }
+.branch-cell { position: relative; display: grid; gap: 2px; justify-items: center; text-align: center; padding: 18px 22px; background: var(--blue); color: #fff; transform: skewX(-14deg); margin: 0; isolation: isolate; overflow: hidden; transition: color .3s; }
+.branch-cell > * { transform: skewX(14deg); transition: transform .45s var(--ease); }
+.branch-cell::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--red); transform: translateY(101%); transition: transform .45s var(--ease); }
+.branch-cell:hover::before, .branch-cell:focus-visible::before { transform: translateY(0); }
+.branch-cell:hover > strong { transform: skewX(14deg) translateY(-2px); }
+.branch-cell strong { font-size: 15px; font-weight: 800; }
+.branch-cell small { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; opacity: .9; }
+@media (max-width: 560px) { .branch-cells > div { flex-basis: 100%; } .branch-cell { transform: none; margin: 0; } .branch-cell > *, .branch-cell:hover > strong { transform: none; } }
+.branch-info em { font-style: normal; font-size: 11px; opacity: .6; text-transform: uppercase; letter-spacing: .1em; }
+.foot-contact a:hover { text-decoration: underline; }

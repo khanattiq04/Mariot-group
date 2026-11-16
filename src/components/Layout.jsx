@@ -4,8 +4,9 @@ import { motion, AnimatePresence, useScroll, useSpring, useMotionValueEvent } fr
 import { ArrowUpRight, ArrowUp, Menu, X, ChevronDown, Phone, Mail, MapPin, ShoppingBag } from 'lucide-react';
 import logo from '../assets/logo.png';
 import mark from '../assets/mark.png';
-import { NAV, COMPANY, SECTORS, BRANCHES } from '../data';
+import { NAV, COMPANY, SECTORS, BRANCHES, BRANCH_CITIES } from '../data';
 import { Magnetic } from './ui';
+import SocialIcon from './SocialIcons';
 import { ease } from './blocks';
 
 export function Preloader({ onDone }) {
@@ -44,7 +45,7 @@ export function Cursor() {
     let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, raf;
     const move = (e) => {
       x = e.clientX; y = e.clientY;
-      ring.current?.classList.toggle('hover', !!e.target.closest?.('a, button, .feat, .photo-card, input, textarea, select, .brand-tile'));
+      ring.current?.classList.toggle('hover', !e.target.closest?.('.socials') && !!e.target.closest?.('a, button, .feat, .photo-card, input, textarea, select, .brand-tile'));
     };
     const loop = () => {
       rx += (x - rx) * 0.16; ry += (y - ry) * 0.16;
@@ -145,15 +146,29 @@ export function Footer({ toTop }) {
   const services = [['Design Your Project', '/design'], ['Fabrication', '/fabrication'], ['Maintenance', '/maintenance'], ['Business Hub', '/business-hub'], ['Kitchen Consultation', '/consultation'], ['Restaurant Opening', '/restaurant-opening'], ['Urgent Request', '/urgent-request']];
   return (
     <footer className="footer">
+      <div className="branch-strip">
+        <div className="container"><span className="branch-strip-h">Our Branches</span></div>
+        <div className="branch-cells">
+          {BRANCHES.map((b, i) => (
+            <motion.div key={b.name + b.tag} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 * i, duration: 0.6, ease }}>
+              <Link to="/branches" className="branch-cell"><strong>{b.name}</strong><small>{b.tag}</small></Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
       <div className="container">
         <div className="footer-top">
           <div>
             <div className="footer-logo"><img src={logo} alt={COMPANY.name} /></div>
             <p className="about">Professional supplier of commercial kitchen equipment, refrigeration, stainless steel fabrication and laundry solutions across the UAE and GCC.</p>
             <div className="socials">
-              <a href={COMPANY.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">IG</a>
-              <a href={COMPANY.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">FB</a>
-              <a href={COMPANY.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">IN</a>
+              {COMPANY.social.map((x, i) => (
+                <motion.a key={x.name} href={x.href} target="_blank" rel="noreferrer" aria-label={x.name} className={x.dark ? 'dark' : ''} style={{ '--brand': x.color }}
+                  initial={{ opacity: 0, y: 24, scale: 0.6 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }}
+                  transition={{ delay: 0.06 * i, type: 'spring', stiffness: 260, damping: 18 }}>
+                  <SocialIcon name={x.name} /><span className="tip">{x.name}</span>
+                </motion.a>
+              ))}
             </div>
           </div>
           <div><h5>Quick links</h5><ul>{quick.map(([l, t]) => <li key={t}><Link to={t}>{l}</Link></li>)}<li><a href={COMPANY.store} target="_blank" rel="noreferrer">Shop Now ↗</a></li></ul></div>
@@ -165,7 +180,7 @@ export function Footer({ toTop }) {
               <li><MapPin /> <span>{COMPANY.address}</span></li>
               <li><Phone /> <a href={COMPANY.phoneHref}>{COMPANY.phone}</a></li>
               <li><Mail /> <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></li>
-              <li><span className="muted">{BRANCHES.length} branches: Dubai · Abu Dhabi · Sharjah · Al Ain</span></li>
+              <li><MapPin /> <Link to="/branches">{BRANCHES.length} branches: {BRANCH_CITIES.join(' · ')}</Link></li>
             </ul>
           </div>
         </div>

@@ -18,7 +18,7 @@ export function About() {
           <div>
             <SectionHead eyebrow="Our story" lines={['Two decades of', 'building kitchens']} accent="kitchens" />
             <Reveal><p className="lead">{ABOUT.story}</p></Reveal>
-            <Reveal delay={0.1}><p className="lead" style={{ marginTop: 16 }}>Today we work from showrooms in Dubai, Abu Dhabi, Sharjah and Al Ain, with our own stainless steel factory and a warehouse holding stock for immediate delivery.</p></Reveal>
+            <Reveal delay={0.1}><p className="lead" style={{ marginTop: 16 }}>Today we work from showrooms in Dubai, Sharjah, Abu Dhabi and Al Ain, plus a showroom in Damascus, Syria, with our own stainless steel factory and a warehouse holding stock for immediate delivery.</p></Reveal>
           </div>
           <RevealImg src={IMG.chef} alt="Chef plating in a professional kitchen" ratio="4 / 5" from="right" />
         </div>
@@ -69,7 +69,7 @@ export function About() {
           })}</div>
         </div>
       </section>
-      <Marquee items={CLIENTS} className="dark" base={2.5} />
+      <Marquee items={CLIENTS} className="dark" />
       <CTA />
     </>
   );
@@ -257,7 +257,7 @@ export function Brands() {
   const list = BRANDS.filter((b) => (cat === 'All' || b.cats.includes(cat)) && b.name.toLowerCase().includes(q.toLowerCase()));
   return (
     <>
-      <PageHero eyebrow="Shop by brand" title="98 trusted global brands" accent="98" text="We partner with the world's leading manufacturers of cooking, refrigeration, coffee, bakery and food processing equipment." img={IMG.kitchen2} />
+      <PageHero eyebrow="Shop by brand" title={`${BRANDS.length} trusted global brands`} accent={String(BRANDS.length)} text="We partner with the world's leading manufacturers of cooking, refrigeration, coffee, bakery and food processing equipment." img={IMG.kitchen2} />
       <section className="section sec-light">
         <div className="container">
           <div className="brand-tools">
@@ -324,20 +324,20 @@ export function BrandDetail() {
 export function Branches() {
   return (
     <>
-      <PageHero eyebrow="Our branches" title="Five locations across the UAE" accent="Five" text="Whether you are planning a new restaurant, hotel, bakery, supermarket, café, or commercial kitchen, our experienced team is ready to provide expert guidance, premium equipment, installation services, and reliable after-sales support." img={u('1512453979798-5ea266f8880c', 1800)} />
+      <PageHero eyebrow="Our branches" title={`${BRANCHES.length} locations across the UAE and Syria`} accent={String(BRANCHES.length)} text="Whether you are planning a new restaurant, hotel, bakery, supermarket, café, or commercial kitchen, our experienced team is ready to provide expert guidance, premium equipment, installation services, and reliable after-sales support." img={u('1512453979798-5ea266f8880c', 1800)} />
       <section className="section sec-light">
         <div className="container">
           <SectionHead eyebrow="Visit a showroom" lines={['Find your nearest', 'Mariot branch']} accent="Mariot" text="Explore our complete range of commercial kitchen equipment from world-renowned brands and discuss your project with our specialists." />
           <div className="br-list">{BRANCHES.map((b, i) => (
-            <motion.div className="branch" key={b.name} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -8% 0px' }} transition={{ duration: 0.8, ease, delay: i * 0.06 }}>
+            <motion.div className="branch" key={b.name + b.tag} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -8% 0px' }} transition={{ duration: 0.8, ease, delay: i * 0.06 }}>
               <span className="br-idx">{String(i + 1).padStart(2, '0')}</span>
-              <div><span className="br-city">{b.name.replace(' Branch', '')}</span><span className="br-tag">{b.tag}</span></div>
+              <div><span className="br-city">{b.name}</span><span className="br-tag">{b.tag}</span></div>
               <div className="branch-info">
                 <span><MapPin />{b.area}</span>
-                <a href={`tel:${b.phone.replace(/\s/g, '')}`}><Phone />{b.phone}</a>
-                <a href={`mailto:${b.email}`}><Mail />{b.email}</a>
+                {b.phone ? <a href={`tel:${b.phone.replace(/\s/g, '')}`}><Phone />{b.phone}</a> : <a href={COMPANY.phoneHref}><Phone />{COMPANY.phone} <em>main line</em></a>}
+                {b.email && <a href={`mailto:${b.email}`}><Mail />{b.email}</a>}
               </div>
-              <a className="branch-go" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Mariot Kitchen Equipment ' + b.area)}`} target="_blank" rel="noreferrer" aria-label={`Directions to ${b.name}`}><ArrowUpRight /></a>
+              <a className="branch-go" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Mariot Kitchen Equipment ' + b.area)}`} target="_blank" rel="noreferrer" aria-label={`Directions to ${b.name} ${b.tag}`}><ArrowUpRight /></a>
             </motion.div>
           ))}</div>
         </div>

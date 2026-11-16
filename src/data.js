@@ -42,11 +42,17 @@ export const COMPANY = {
   email: 'admin@mariotkitchen.com',
   address: 'Near Abu Bakkar Siddique Metro Station, Dubai, UAE',
   store: 'https://www.mariotstore.com',
-  social: {
-    instagram: 'https://www.instagram.com/mariotuae/',
-    facebook: 'https://www.facebook.com/mariotuae/',
-    linkedin: 'https://www.linkedin.com/company/mariot-kitchen-equipment',
-  },
+  /* Footer social links — order here is the order shown */
+  social: [
+    { name: 'WhatsApp', href: 'https://api.whatsapp.com/send/?phone=97142882777', color: '#25d366' },
+    { name: 'Instagram', href: 'https://www.instagram.com/mariotuae/', color: 'linear-gradient(45deg,#f9ce34,#ee2a7b 50%,#6228d7)' },
+    { name: 'Facebook', href: 'https://www.facebook.com/mariotuae', color: '#1877f2' },
+    { name: 'X', href: 'https://x.com/MariotUae', color: '#ffffff', dark: true },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/mariot-kitchen-equipment-8a34a4108/', color: '#0a66c2' },
+    { name: 'YouTube', href: 'https://www.youtube.com/channel/UCUCWktTJNpRzUEJ58JHLu_g', color: '#ff0000' },
+    { name: 'TikTok', href: 'https://www.tiktok.com/@mariotmedia', color: 'linear-gradient(135deg,#25f4ee,#fe2c55)' },
+    { name: 'Pinterest', href: 'https://www.pinterest.com/mariotuae/', color: '#e60023' },
+  ],
 };
 
 export const NAV = [
@@ -154,7 +160,7 @@ export const WHY = [
   { icon: LifeBuoy, title: 'After-Sales Support', text: 'Maintenance, parts and service you can rely on.' },
   { icon: PackageCheck, title: 'Delivery & Installation', text: 'Professional logistics across the UAE.' },
   { icon: Hammer, title: 'Custom Fabrication', text: 'In-house stainless steel built to your specs.' },
-  { icon: MapPin, title: 'Multiple Branches', text: 'Presence across the UAE — always close to you.' },
+  { icon: MapPin, title: 'Multiple Branches', text: "Eight locations across the UAE and Syria — always close to you." },
 ];
 
 export const FAB_ITEMS = [
@@ -178,7 +184,7 @@ export const GCC = [
   { flag: '🇰🇼', name: 'Kuwait', note: 'Active market' }, { flag: '🇶🇦', name: 'Qatar', note: 'Active market' },
   { flag: '🇧🇭', name: 'Bahrain', note: 'Active market' }, { flag: '🇴🇲', name: 'Oman', note: 'Active market' },
 ];
-export const BEYOND = ['🇮🇶 Iraq', '🇯🇴 Jordan', '🇱🇧 Lebanon', '🇪🇬 Egypt', '🇲🇦 Morocco', '🇮🇳 India', '🇰🇪 Kenya', '🇹🇿 Tanzania', 'More on request'];
+export const BEYOND = ['🇸🇾 Syria', '🇮🇶 Iraq', '🇯🇴 Jordan', '🇱🇧 Lebanon', '🇪🇬 Egypt', '🇲🇦 Morocco', '🇮🇳 India', '🇰🇪 Kenya', '🇹🇿 Tanzania', 'More on request'];
 export const EXPORT_STATS = [
   { value: 15, suffix: '+', label: 'Countries served' }, { value: 100, suffix: '+', label: 'Export projects' }, { value: 24, suffix: '/7', label: 'Support availability' },
 ];
@@ -287,7 +293,7 @@ export const DESIGN = {
   ],
   faq: [
     { q: 'Do you offer a free initial consultation?', a: 'Yes — the first consultation and a preliminary layout proposal are completely free, with no obligation.' },
-    { q: 'Which areas do you serve?', a: 'We supply and install across all 7 emirates of the UAE, with dedicated branches supporting the wider region.' },
+    { q: 'Which areas do you serve?', a: 'We supply and install across all 7 emirates of the UAE, with branches in Dubai, Sharjah, Abu Dhabi and Al Ain, and a showroom in Damascus, Syria.' },
     { q: 'Do you work with our existing space and contractor?', a: 'Absolutely. We coordinate with your architect, contractor and MEP team for seamless integration.' },
     { q: 'How long does a project usually take?', a: 'Design takes 1–2 weeks; full supply and installation runs from 3 to 8 weeks depending on scope.' },
   ],
@@ -315,13 +321,19 @@ export const URGENT_CASES = [
   { icon: Cog, title: 'Spare Parts', text: 'Genuine parts pulled from our warehouse stock.' },
 ];
 
+/* Branches — shown on the Branches page and in the "Our Branches" strip above every footer.
+   phone / email are optional: a branch without them shows the main line instead. */
 export const BRANCHES = [
-  { name: 'Dubai Branch', area: 'Deira, Dubai, UAE', email: 'admin@mariotkitchen.com', phone: '+971 4 288 2777', tag: 'Head office' },
-  { name: 'Al Ain Branch', area: 'Al Ain Industrial Area, UAE', email: 'alain@mariotkitchen.com', phone: '+971 3 722 7337', tag: 'Showroom' },
-  { name: 'Abu Dhabi Muroor Branch', area: 'Muroor Road, Abu Dhabi, UAE', email: 'sales2@mariotkitchen.com', phone: '+971 2 645 9353', tag: 'Showroom' },
-  { name: 'Sharjah Branch', area: 'Al Majaz, Sharjah, UAE', email: 'sales@mariot-group.com', phone: '+971 6 767 7777', tag: 'Showroom' },
-  { name: 'Sharjah Industrial Branch', area: 'Industrial Area, Sharjah, UAE', email: 'factory@mariotkitchen.com', phone: '+971 6 767 7776', tag: 'Factory' },
+  { name: 'Dubai', area: 'Deira, Dubai, UAE', city: 'Dubai', tag: 'Head office', phone: '+971 4 288 2777', email: 'admin@mariotkitchen.com' },
+  { name: 'Sharjah Industrial Area 11', area: 'Industrial Area 11, Sharjah, UAE', city: 'Sharjah', tag: 'Factory', phone: '+971 6 767 7776', email: 'factory@mariotkitchen.com' },
+  { name: 'Sharjah Industrial Area 11', area: 'Industrial Area 11, Sharjah, UAE', city: 'Sharjah', tag: 'Showroom' },
+  { name: 'Sharjah Al-Majaz', area: 'Al Majaz, Sharjah, UAE', city: 'Sharjah', tag: 'Showroom', phone: '+971 6 767 7777', email: 'sales@mariot-group.com' },
+  { name: 'Al Ain Industrial Area', area: 'Al Ain Industrial Area, UAE', city: 'Al Ain', tag: 'Showroom', phone: '+971 3 722 7337', email: 'alain@mariotkitchen.com' },
+  { name: 'Muroor Rd, Abu Dhabi', area: 'Muroor Road, Abu Dhabi, UAE', city: 'Abu Dhabi', tag: 'Showroom', phone: '+971 2 645 9353', email: 'sales2@mariotkitchen.com' },
+  { name: 'Al Zahiyah, Abu Dhabi', area: 'Al Zahiyah, Abu Dhabi, UAE', city: 'Abu Dhabi', tag: 'Showroom' },
+  { name: 'Damascus, Syria', area: 'Damascus, Syria', city: 'Damascus', tag: 'Showroom' },
 ];
+export const BRANCH_CITIES = [...new Set(BRANCHES.map((b) => b.city))];
 
 export const EMIRATES = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain', 'Al Ain', 'Other'];
 
@@ -386,6 +398,7 @@ Longoni|longoni|Longoni-Brand.webp|Bakery
 Mac.Pan|mac-pan|macpac.webp|Bakery
 Mahlkonig|mahlkonig|MAHLKONIG-vector-logo.webp|Coffee & Bar
 Mariot|mariot|mariot.webp|Refrigeration-line,Coffee & Bar,Food Processing,Snack Maker,Super Market,Dry Store
+Mariot Fabrication|mariot-fabrication|fabrication.webp|
 MBM|mbm|mbm-logo.webp|Cooking,Bakery,Dish Washer
 Menumaster|menumaster|menumaster.webp|Cooking,Bakery
 Merrychef|merrychef|merrychef.webp|
